@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import cn.edu.jsu.tm.dao.ExcelIn;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -140,8 +143,26 @@ public MainInterface() {
 		lblNewLabel_6.setForeground(Color.BLUE);
 		lblNewLabel_6.setBounds(135, 30, 220, 37);
 		frame.getContentPane().add(lblNewLabel_6);
+		
+		JLabel lblexcel = new JLabel("\u5BFC\u51FAExcel");
+		lblexcel.setBounds(14, 290, 66, 15);
+		frame.getContentPane().add(lblexcel);
+		
+		JButton dcbtnNewButton_6 = new JButton("导出");
+		dcbtnNewButton_6.addActionListener(new ActionListener() {//给按钮增加监听事件
+			  public void actionPerformed(ActionEvent e) {//监听鼠标单击
+				  new ExcelIn().main(null);
+				   JOptionPane.showMessageDialog(null, "导出excel成功");
+				  frame.dispose();
+			  }
+			});
+		dcbtnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		dcbtnNewButton_6.setBounds(124, 286, 111, 23);
+		frame.getContentPane().add(dcbtnNewButton_6);
 		frame.setLocationRelativeTo(null);//窗体居中
 		
 	}
-
 }

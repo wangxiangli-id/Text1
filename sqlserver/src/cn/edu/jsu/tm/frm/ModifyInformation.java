@@ -106,34 +106,9 @@ public class ModifyInformation extends JFrame {
 		JButton btnNewButton = new JButton("确定修改");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				  String key=textField .getText().trim();//获取食品编号
-				  String foodname=textField_1.getText();
-				  int foodprice=Integer.parseInt(textField_2.getText().trim());
-				  int number=Integer.parseInt(textField_3.getText().trim());
-				  int number1=Integer.parseInt(textField_4.getText().trim());
-				  Connection conn=new DatabaseConnection().getConnection();	
-				  Statement state = null;
-				try {
-					state = conn.createStatement();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}   //容器
-			        String sql="update Foodsheet set Foodname="+("'"+foodname+"'")+",Foodprice="+foodprice+",storage="+number+",quality="+number1+" where id="+key;   //SQL语句
-			        try {
-						state.executeUpdate(sql);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}         //将sql语句上传至数据库执行
-			        
-			        try {
-						conn.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}//关闭通道
-			JOptionPane.showMessageDialog(null,"修改成功");}
+				
+				Update();
+				}
 			
 		});
 		btnNewButton.setBounds(133, 300, 113, 27);
@@ -151,10 +126,41 @@ public class ModifyInformation extends JFrame {
 		contentPane.add(btnNewButton_1);
 	}
 
+	public void Update() {
+		 String key=textField .getText().trim();//获取食品编号
+		  String foodname=textField_1.getText();
+		  int foodprice=Integer.parseInt(textField_2.getText().trim());
+		  int number=Integer.parseInt(textField_3.getText().trim());
+		  int number1=Integer.parseInt(textField_4.getText().trim());
+		  Connection conn=new DatabaseConnection().getConnection();	
+		  Statement state = null;
+		try {
+			state = conn.createStatement();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}   //容器
+	        String sql="update Foodsheet set Foodname="+("'"+foodname+"'")+",Foodprice="+foodprice+",storage="+number+",quality="+number1+" where id="+key;   //SQL语句
+	        try {
+				state.executeUpdate(sql);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}         //将sql语句上传至数据库执行
+	        
+	        try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}//关闭通道
+	JOptionPane.showMessageDialog(null,"修改成功");
+	}
 	public static boolean find(String sql) {
 		DatabaseConnection db=new DatabaseConnection();
 		try(Connection conn=db.getConnection();Statement stm=conn.createStatement();) {
-			ResultSet rs=stm.executeQuery(sql); 
+			String sql2=sql;
+			ResultSet rs=stm.executeQuery(sql2); 
 			if(rs.next()) {
 				return true;
 			}

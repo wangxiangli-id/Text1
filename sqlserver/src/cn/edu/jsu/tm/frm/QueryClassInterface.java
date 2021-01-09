@@ -181,28 +181,7 @@ private void initialize() {
 		btnNewButton_3 = new JButton("删除");
 		btnNewButton_3.addActionListener(new ActionListener() {//给按钮增加监听事件
 			  public void actionPerformed(ActionEvent e) {//监听鼠标单击
-				  String key=textField .getText().trim();//获取输入关键字文本框的值
-				  Connection conn=new DatabaseConnection().getConnection();			  
-				  Statement state = null;
-				try {
-					state = conn.createStatement();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}   //容器
-			        String sql="delete from Foodsheet where id="+key;   //SQL语句
-			        try {
-						state.executeUpdate(sql);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}  
-			        try {
-						conn.close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				  FoodDelete();
 			        JOptionPane.showMessageDialog(null,"删除成功");
 			        model=new DefaultTableModel(new QueryClass().getSelectAll(sql1),titles);//设置数据模型
 					table.setModel(model);
@@ -220,6 +199,30 @@ private void initialize() {
 			});
 		panel_1.add(btnNewButton_4);
 	}
+public void FoodDelete() {
+	String key=textField .getText().trim();//获取输入关键字文本框的值
+	  Connection conn=new DatabaseConnection().getConnection();			  
+	  Statement state = null;
+	try {
+		state = conn.createStatement();
+	} catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}   //容器
+      String sql="delete from Foodsheet where id="+key;   //SQL语句
+      try {
+			state.executeUpdate(sql);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}  
+      try {
+			conn.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+}
 }
 
 
